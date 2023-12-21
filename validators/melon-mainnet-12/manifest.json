@@ -1,0 +1,14 @@
+{
+    "type": "nominator-pool",
+    "validator_address": "Ef9L7GkP4d4MCZLFoTUwL8UvumsvRT4-0dO5DLeelAthrimn",
+    "nominator_pools": {
+        "first": "Ef-wXSEEs909my30MMD4Ub-H3uUU4HAm0gY6QKB92FDr58B5",
+        "second": "Ef9RrDM7WdlKfXyn8voM0ydYWAgckqo_imwAs5T5EhVA8KW-"
+    },
+    "custody_wallet": {
+        "address": "EQBg_ebI0nzsQBRfQ4u9dvemQKApcQLfZqBNVidIwVw2owIH",
+        "pubkey": "c638f07bc85f5b15d2997257451fb7d8da265aaaae71a6b44496eacdad784428"
+    },
+    "setup_ticket": "https://blockchain.atlassian.net/browse/TON-90",
+    "client": "564b4d13-2f07-4210-b222-0c4c5dd4b8f1"
+}
