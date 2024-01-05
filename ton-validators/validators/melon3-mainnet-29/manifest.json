@@ -1,0 +1,16 @@
+{
+    "type": "single-nominator",
+    "validator_address": "Ef_WQXlM6Bg7gunzqmpKYkMqBZXQQbsxAWID9IcY1BUqM3X-",
+    "nominator_pools": {
+        "first": "Ef-e1ZJV_658Ab5SZIH0aaNatXdq1nIJznPz7vp7vNpAWXFB"
+    },
+    "custody_wallet": {
+        "address": "EQBg_ebI0nzsQBRfQ4u9dvemQKApcQLfZqBNVidIwVw2owIH",
+        "pubkey": "c638f07bc85f5b15d2997257451fb7d8da265aaaae71a6b44496eacdad784428"
+    },
+    "vesting_contract": {
+        "address": "EQCLqFTsXJ8YlS3j4W9I9NTDPi8940HQNxRJX5qMAeGxFcrL"
+    },
+    "setup_ticket": "https://blockchain.atlassian.net/browse/TON-112",
+    "client": "564b4d13-2f07-4210-b222-0c4c5dd4b8f1"
+}
