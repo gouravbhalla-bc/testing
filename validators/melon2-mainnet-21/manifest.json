@@ -1,0 +1,14 @@
+{
+    "type": "nominator-pool",
+    "validator_address": "Ef-dUdPS_I6TbhcOrPpRiCXvjvZEmmva_khyRNQqzFu0bs0T",
+    "nominator_pools": {
+        "first": "Ef_mialZ83KWdYmQRSl9vTg8IISlpVHSeOe6ToeB_I7vagso",
+        "second": "Ef9_ZkpjO1uy0WhmpQ2g-RvQbyr0awds5lMgvhMssq1Jlhyl"
+    },
+    "custody_wallet": {
+        "address": "EQBFCoL7BmIyP35qNMCFgBtCmRk_d4GEfJ48XNoRafoJFpE7",
+        "pubkey": "754a162184cc5b244eb9172518115522ca1cd8ff34ba094ee4776d1c35ae723c"
+    },
+    "setup_ticket": "https://blockchain.atlassian.net/browse/FPC-88",
+    "client": "7e15b750-2097-4039-ae8b-4c4108ce84f0"
+}
