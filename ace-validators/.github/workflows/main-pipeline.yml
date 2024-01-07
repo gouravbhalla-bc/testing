@@ -1,0 +1,22 @@
+name: main pipeline
+
+on:
+  push:
+    branches:
+      - 'test_master'
+      - 'master'
+
+jobs:
+   
+  build:
+    uses: blockchain/devx-workflows/.github/workflows/build-common-pipeline.yml@0.0.25
+    with:
+      service_name: altonomy-ace-services
+      dockerfile: GitDockerfile
+      push_to_gcr: true
+      docker_build_args: branch=${GITHUB_REF##*/}
+      tests_script: scripts/teamcity/test.sh 
+      version_script: .github/scripts/docker-version.sh
+      
+    secrets:
+      build_args: PYPI_TOKEN="${{ secrets.PYPI_TOKEN }}"  

@@ -1,0 +1,5 @@
+mode: alt_ace_2
+args:
+  - trade
+
+replicas: 1

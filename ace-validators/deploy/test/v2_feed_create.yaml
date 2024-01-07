@@ -1,0 +1,5 @@
+mode: alt_ace_2
+args:
+  - feed_publisher_delete
+
+replicas: 1

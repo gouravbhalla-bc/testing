@@ -1,0 +1,70 @@
+{{- if .Values.deployment.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ace-services.fullname" $ }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ace-services.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "ace-services.selectorLabels" $ | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "ace-services.labels" $ | nindent 8 }}
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        args:
+          - {{ .Values.mode }}
+          {{- range .Values.args }}
+          - {{ . }}
+          {{- end }}
+        {{- if eq .Values.mode "api" }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.url.prefix }}{{ .Values.url.ping }}
+            port: {{ .Values.port }}
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          timeoutSeconds: 30
+          failureThreshold: 5
+        startupProbe:
+          httpGet:
+            path: {{ .Values.url.prefix }}{{ .Values.url.ping }}
+            port: {{ .Values.port }}
+          periodSeconds: 60
+          timeoutSeconds: 30
+          failureThreshold: 5
+        {{- end }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+        - name: altonomy-config
+          mountPath: /root/.altonomy
+      volumes:
+      - name: altonomy-config
+        configMap:
+          name: {{ .Values.altonomyConfig }}
+          items:
+          - key: config.ini
+            path: config.ini
+{{- end }}

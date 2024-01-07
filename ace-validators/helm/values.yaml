@@ -1,0 +1,44 @@
+url:
+  host: null
+  tls_secret: null
+
+  prefix: /ace_api
+  ping: /ping
+
+  paths:
+    - /ace_api
+
+deployment:
+  enabled: yes
+
+cron:
+  enabled: no
+  schedule: "11 * * * *"
+
+port: 8022
+
+mode: api
+args: []
+
+altonomyConfig: altonomy-config
+
+# Kubernetes
+replicas: 2
+
+image:
+  repository: gcr.altono.app/blockchain-internal/v1/altonomy-ace-services
+
+imagePullSecrets:
+  - name: altonomy-gcr
+
+nodeSelector: {}
+
+tolerations: []
+
+resources:
+  requests:
+    memory: 400Mi
+    cpu: 100m
+  limits:
+    memory: 450Mi
+    cpu: 500m

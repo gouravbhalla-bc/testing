@@ -1,0 +1,41 @@
+services:
+  app-test:
+    build:
+      context: .
+      dockerfile: ./scripts/DockerUnitTestfile
+      target: test
+    volumes:
+      - ".:/code"
+      - "./test_config.ini:/root/.altonomy/config.ini"
+    links:
+      - db
+      - cache
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+  cache:
+    image: redis:7.0
+    healthcheck:
+      test: ["CMD", "redis-cli","hmset" ,"AUTH:PUBLIC:USER_MAP" ,"1","1"]      
+      timeout: 20s
+      retries: 10
+#    ports:
+#       - "6379:6379"
+  db:
+    platform: linux/x86_64
+    image: mysql:8.0
+#    ports:
+#       - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Ace
+    volumes:
+      - test_vols:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+volumes: 
+  test_vols: {}

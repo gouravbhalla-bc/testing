@@ -1,0 +1,12 @@
+deployment:
+  enabled: no
+
+cron:
+  enabled: yes
+  schedule: "11 * * * *"
+
+mode: alt_ace_2
+args:
+  - ticker
+
+replicas: 1

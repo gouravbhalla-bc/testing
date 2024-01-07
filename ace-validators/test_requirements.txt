@@ -1,0 +1,14 @@
+coverage
+coverage-badge
+responses
+pytest-mock
+mock
+pytest-cov
+pytest-describe
+pytest
+pytest-cov
+flake8
+pytest
+sqlalchemy_utils
+freezegun
+protobuf==3.20.1

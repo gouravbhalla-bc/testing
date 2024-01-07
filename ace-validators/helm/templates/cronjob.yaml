@@ -1,0 +1,51 @@
+{{- if .Values.cron.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "ace-services.fullname" $ }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ace-services.labels" $ | nindent 4 }}
+spec:
+  schedule: {{ .Values.cron.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "ace-services.labels" $ | nindent 12 }}
+        spec:
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+              args:
+                - {{ .Values.mode }}
+                {{- range .Values.args }}
+                - {{ . }}
+                {{- end }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              volumeMounts:
+              - name: altonomy-config
+                mountPath: /root/.altonomy
+          volumes:
+            - name: altonomy-config
+              configMap:
+                name: {{ .Values.altonomyConfig }}
+                items:
+                - key: config.ini
+                  path: config.ini
+{{- end }}

@@ -1,0 +1,5 @@
+mode: alt_athena_2
+args:
+  - snapshot_feed_publisher
+
+replicas: 1
