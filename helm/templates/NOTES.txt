@@ -1,0 +1,5 @@
+Created {{ .Chart.Name }}
+    Name               : {{ include "ace-services.fullname" $ | quote }}
+    Namespace          : {{ .Release.Namespace }}
+    Chart Version      : {{ .Chart.Version }}
+    App Version        : {{ .Chart.AppVersion }}

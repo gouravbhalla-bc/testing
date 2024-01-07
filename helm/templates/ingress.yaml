@@ -1,0 +1,37 @@
+{{- if eq .Values.mode "api" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ace-services.fullname" $ }}-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.url.prefix }}/$1
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  {{- range .Values.url.paths }}
+  - http:
+      paths:
+      {{- if eq . "/" }}
+      - path: {{ . }}(.*)
+      {{- else }}
+      - path: {{ . }}(?:/|$)(.*)
+      {{- end }}
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ include "ace-services.fullname" $ }}-service
+            port:
+              number: 80
+    {{- if $.Values.url.host }}
+    host: {{ $.Values.url.host | quote }}
+    {{- end }}
+  {{- end }}
+  {{- if .Values.url.host }}
+  {{- if .Values.url.tls_secret }}
+  tls:
+    - hosts:
+      - {{ .Values.url.host | quote }}
+      secretName: {{ .Values.url.tls_secret }}
+  {{- end }}
+  {{- end }}
+{{- end }}

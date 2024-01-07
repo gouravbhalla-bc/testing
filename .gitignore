@@ -1,0 +1,29 @@
+# IDE - VS Code
+.vscode
+
+# Python
+__pycache__
+
+# alembic
+alembic.ini
+alembic/
+
+# setup
+build/
+dist/
+*.egg-info/
+
+# pycharm
+.idea/
+
+.coverage
+logs
+
+# virtualenv
+.env
+env
+venv
+
+.python-version
+
+*.png

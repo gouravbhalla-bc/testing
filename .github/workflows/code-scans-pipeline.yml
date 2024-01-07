@@ -1,0 +1,13 @@
+name: "Code Scan Pipeline"
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  code-scans:
+    if: github.event.pull_request.merged == true
+    uses: blockchain/devx-workflows/.github/workflows/code-scan-pipeline.yml@b738d234382439b5c8354eb9e5afda825f353398
+    secrets:
+      checkmarx_client_id: ${{secrets.CHECKMARX_CLIENT_ID}}
+      checkmarx_client_secret: ${{secrets.CHECKMARX_CLIENT_SECRET}}

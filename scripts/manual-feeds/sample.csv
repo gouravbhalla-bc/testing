@@ -1,0 +1,4 @@
+feed_type,portfolio,transfer_type,contract,product,coa_code,comp_code,asset,amount,counterparty_ref,counterparty_name,account,entity,value_date,trade_date
+PV,8002,trade,DOGEUSDT Short,Futures,-1,,DOGE,-23,CID100001,Jason Kin Hoi Fang,,BGT Issuer Limited,2021-12-06 04:00:00,2021-12-06 04:00:00
+PV,8002,trade,,Cash Flow,-1,,DOGE,-23,CID100001,Jason Kin Hoi Fang,,BGT Issuer Limited,2021-12-06 04:00:00,2021-12-06 04:00:00
+PV,8002,trade,,FX Spot,-1,,DOGE,46,CID100001,Jason Kin Hoi Fang,,BGT Issuer Limited,2021-12-06 04:00:00,2021-12-06 04:00:00

@@ -1,0 +1,27 @@
+# This is a sample build configuration for Python.
+# Check our guides at https://confluence.atlassian.com/x/x4UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: python:3.6
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - pip
+        script:
+          - pip install -r requirements.txt -r test_requirements.txt
+          - chmod +x scripts/code_quality.sh scripts/test.sh
+          - ./scripts/code_quality.sh
+          - ./scripts/test.sh
+        services:
+          - mysql
+
+definitions:
+  services:
+    mysql:
+      image: mysql
+      environment:
+        MYSQL_DATABASE: AceTest
+        MYSQL_ROOT_PASSWORD: root

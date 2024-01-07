@@ -1,0 +1,13 @@
+{{- if eq .Values.mode "api" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ace-services.fullname" $ }}-service
+spec:
+  selector:
+    {{- include "ace-services.selectorLabels" $ | nindent 4 }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.port }}
+{{- end }}
